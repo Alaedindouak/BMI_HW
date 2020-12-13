@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row">
+        <h5 class="my-2 p-0 text-secondary">IMB CALCULATOR</h5>
+        <hr>
+        <div class="col-sm-8 card">
+            <form method="post" class="m-1">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form | crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-primary my-2" type="submit">calculate</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-4 card">
+            {% if imb and imb_text and imb_advise%}
+                <div class="card my-2 p-2"> {{ form.data.name }} your IMB is : {{ imb|floatformat:-2 }}</div>
+                <p class="card my-2 p-2">Situation : {{ imb_text }}</p>
+                <p class="card my-2 p-2">{{ imb_advise }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
